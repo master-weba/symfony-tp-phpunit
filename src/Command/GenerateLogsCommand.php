@@ -6,9 +6,7 @@ use DateInterval;
 use DatePeriod;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -18,10 +16,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class GenerateLogsCommand extends Command
 {
-    private const LOGS_FILE_PATH = "./var/data/";
-    private const LOGS_FILE_NAME = "logs.json";
+
     private const DATES_LIMITS = ["start"=>"2023-09-01","end"=>"2023-09-05"];
-    private const TYPES = ["error","info","success"];
+    private const TYPES = ["error","info","success","warning"];
 
     /**
      * @return void
@@ -39,16 +36,16 @@ class GenerateLogsCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
         $this->generateLogsData();
-        if(file_exists(self::LOGS_FILE_PATH) === true){
+        if(file_exists($_ENV["LOGS_FILE_PATH"]) === true){
             $io->error("File already exists.");
             return Command::FAILURE;
         }
 
-        if(is_dir(self::LOGS_FILE_PATH) === false){
-            mkdir(self::LOGS_FILE_PATH);
+        if(is_dir($_ENV["LOGS_FILE_PATH"]) === false){
+            mkdir($_ENV["LOGS_FILE_PATH"]);
         }
 
-        file_put_contents(self::LOGS_FILE_PATH.self::LOGS_FILE_NAME,$this->generateLogsData());
+        file_put_contents($_ENV["LOGS_FILE_PATH"].$_ENV["LOGS_FILE_NAME"],$this->generateLogsData());
 
 
         $io->success('File successfully generated !');
@@ -108,9 +105,13 @@ class GenerateLogsCommand extends Command
                 "User does not exist.",
                 "Memory"
             ],
-            "info"=>[
+            "warning"=>[
                 "High memory peak detected.",
                 "Low available disk space."
+            ],
+            "info"=>[
+                "Data backup successfully end",
+                "Data imported successfully"
             ],
             "success"=>[
                 "User authenticate with success",

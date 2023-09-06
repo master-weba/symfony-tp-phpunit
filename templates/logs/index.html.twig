@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Logs index{% endblock %}
+{% set textColors = {"error":"text-danger","info":"text-info","warning":"text-warning","success":"text-success"} %}
+{% block body %}
+    <div class="table-responsive">
+        <table class="table" id="logs-table">
+            <thead>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Message</th>
+            </thead>
+            <tbody>
+            {% for index,entry in logs %}
+                <tr id="log-entry-{{ index }}">
+                    <td id="log-entry-{{ index }}-date">{{ entry.date|date('Y-m-d H:i:s') }}</td>
+                    <td id="log-entry-{{ index }}-type" class="{{ textColors[entry.type] }}">{{ entry.type }}</td>
+                    <td id="log-entry-{{ index }}-message" >{{ entry.message }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
