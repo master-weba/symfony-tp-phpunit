@@ -2,18 +2,20 @@
 
 namespace App\Entity;
 
+use DateTimeImmutable;
+
 class LogTrace
 {
-    private \DateTimeImmutable $date;
+    private DateTimeImmutable $date;
     private string $type;
     private string $message;
 
     /**
-     * @param \DateTimeImmutable $date
+     * @param DateTimeImmutable $date
      * @param string $type
      * @param string $message
      */
-    public function __construct(\DateTimeImmutable $date, string $type, string $message)
+    public function __construct(DateTimeImmutable $date, string $type, string $message)
     {
         $this->date = $date;
         $this->type = $type;
@@ -21,9 +23,9 @@ class LogTrace
     }
 
     /**
-     * @return \DateTimeImmutable
+     * @return DateTimeImmutable
      */
-    public function getDate(): \DateTimeImmutable
+    public function getDate(): DateTimeImmutable
     {
         return $this->date;
     }

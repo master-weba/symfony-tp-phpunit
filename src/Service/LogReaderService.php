@@ -6,7 +6,12 @@ use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 
 class LogReaderService
 {
-    public function getEntries(string $filename){
+    /**
+     * @param string $filename
+     * @return mixed
+     */
+    public function getEntries(string $filename): mixed
+    {
         $path = "../$filename";
 
         if(file_exists($path) === false){
