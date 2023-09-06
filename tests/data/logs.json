@@ -1,16 +1,16 @@
 [
     {
-        "date": "2023-09-01 00:00",
+        "date": "2023-09-01 00:00:00",
         "type": "error",
         "message": "Memory"
     },
     {
-        "date": "2023-09-01 02:00",
+        "date": "2023-09-01 02:00:00",
         "type": "warning",
         "message": "Low available disk space."
     },
     {
-        "date": "2023-09-01 04:00",
+        "date": "2023-09-01 04:00:00",
         "type": "info",
         "message": "Data backup successfully end"
     }
