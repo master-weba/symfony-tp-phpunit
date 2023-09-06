@@ -11,13 +11,23 @@
                 <th>Message</th>
             </thead>
             <tbody>
-            {% for index,entry in logs %}
-                <tr id="log-entry-{{ index }}">
-                    <td id="log-entry-{{ index }}-date">{{ entry.date|date('Y-m-d H:i:s') }}</td>
-                    <td id="log-entry-{{ index }}-type" class="{{ textColors[entry.type] }}">{{ entry.type }}</td>
-                    <td id="log-entry-{{ index }}-message" >{{ entry.message }}</td>
+            {%  if logs|length > 0 %}
+                {% for index,entry in logs %}
+                    <tr id="log-entry-{{ index }}">
+                        <td id="log-entry-{{ index }}-date">{{ entry.date|date('Y-m-d H:i:s') }}</td>
+                        <td id="log-entry-{{ index }}-type" class="{{ textColors[entry.type] }}">{{ entry.type }}</td>
+                        <td id="log-entry-{{ index }}-message" >{{ entry.message }}</td>
+                    </tr>
+                {% endfor %}
+            {% elseif parseError == true %}
+                <tr>
+                    <td> Unable to read data source</td>
                 </tr>
-            {% endfor %}
+            {% else %}
+                <tr>
+                    <td> No entries to display</td>
+                </tr>
+            {%  endif %}
             </tbody>
         </table>
     </div>
