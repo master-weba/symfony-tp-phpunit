@@ -11,12 +11,19 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LogsController extends AbstractController
 {
+
+    public function __construct(
+        private LogReaderService $service
+    )
+    {
+    }
+
+
     #[Route('/logs', name: 'app_logs')]
     public function index(): Response
     {
         try{
-            $service = new LogReaderService();
-            $data = $service->getEntries($_ENV['LOGS_FILE_PATH'].$_ENV["LOGS_FILE_NAME"]);
+            $data = $this->service->getEntries($_ENV['LOGS_FILE_PATH'].$_ENV["LOGS_FILE_NAME"]);
             $data = array_map(function($entry){
                 return new LogTrace(date_create_immutable($entry["date"]),$entry["type"],$entry["message"]);
             },$data);
