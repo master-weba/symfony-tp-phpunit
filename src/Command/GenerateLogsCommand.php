@@ -71,7 +71,7 @@ class GenerateLogsCommand extends Command
             $message=$this->getRandomMessageForType($type);
 
             $entries[] = [
-                "date"=>$date->format('Y-m-d H:i'),
+                "date"=>$date->format('Y-m-d H:i:s'),
                 "type"=>$type,
                 "message"=>$message
             ];
