@@ -5,6 +5,7 @@ namespace App\Tests\Unit;
 use App\Entity\LogTrace;
 use PHPUnit\Framework\TestCase;
 use stdClass;
+use TypeError;
 
 class LogTraceUnitTest extends TestCase
 {
@@ -20,7 +21,7 @@ class LogTraceUnitTest extends TestCase
         $testValues = ["string",12344,[],new StdClass(), null];
 
         foreach($testValues as $value){
-            $this->expectException(\TypeError::class);
+            $this->expectException(TypeError::class);
             $trace = new LogTrace($value,self::TEST_VALUES["type"],self::TEST_VALUES["message"]);
         }
 
@@ -31,7 +32,7 @@ class LogTraceUnitTest extends TestCase
         $testValues = [12344,[],new StdClass(), null];
 
         foreach($testValues as $value){
-            $this->expectException(\TypeError::class);
+            $this->expectException(TypeError::class);
             $trace = new LogTrace(date_create_immutable(self::TEST_VALUES["date"]),$value,self::TEST_VALUES["message"]);
         }
 
@@ -42,7 +43,7 @@ class LogTraceUnitTest extends TestCase
         $testValues = [12344,[],new StdClass(), null];
 
         foreach($testValues as $value){
-            $this->expectException(\TypeError::class);
+            $this->expectException(TypeError::class);
             $trace = new LogTrace(date_create_immutable(self::TEST_VALUES["date"]),self::TEST_VALUES["type"],$value);
         }
     }
